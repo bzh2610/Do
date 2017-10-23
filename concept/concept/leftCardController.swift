@@ -10,7 +10,8 @@ import UIKit
 
 class leftCardController: UIViewController {
 
-     @IBOutlet weak var greyProgressMarginBottom: NSLayoutConstraint!
+    @IBOutlet weak var addButton: UIImageView!
+    @IBOutlet weak var greyProgressMarginBottom: NSLayoutConstraint!
      @IBOutlet weak var activeProgressMarginBottom: NSLayoutConstraint!
     
     @IBOutlet weak var TableCellViewLeft: UIView!
@@ -22,6 +23,7 @@ class leftCardController: UIViewController {
         //tableView.reloadData()
         
         print("Full card");
+        addButton.isHidden=false
             greyProgressMarginBottom.constant=150
             activeProgressMarginBottom.constant=150
         TableCellViewLeft.isHidden = false
@@ -32,6 +34,7 @@ class leftCardController: UIViewController {
     @objc func switchSmallCard(){
         
         print("Small card");
+          addButton.isHidden=true
         greyProgressMarginBottom.constant=30
          TableCellViewLeft.isHidden = true
         activeProgressMarginBottom.constant=30

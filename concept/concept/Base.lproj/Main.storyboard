@@ -27,7 +27,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="2KE-a2-b05">
                                 <rect key="frame" x="0.0" y="-400" width="375" height="266"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, Evan !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mID-gN-jdY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bonjour, Evan !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mID-gN-jdY">
                                 <rect key="frame" x="30" y="130" width="345" height="27"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
                                 <nil key="highlightedColor"/>
@@ -153,19 +153,27 @@
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qiZ-we-We5">
                                 <rect key="frame" x="50" y="150" width="400" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="n9z-Eu-o4G"/>
                                     <constraint firstAttribute="height" constant="200" id="pKK-te-FrK"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="cjs-QS-I8S" kind="embed" id="QWe-mV-mYN"/>
                                 </connections>
                             </containerView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_event" translatesAutoresizingMaskIntoConstraints="NO" id="OYH-Tx-Akn">
+                                <rect key="frame" x="380" y="310" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="11k-y1-eNt"/>
+                                    <constraint firstAttribute="width" constant="70" id="Yso-fs-tH1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="d6d-I6-hJn" firstAttribute="trailing" secondItem="OYH-Tx-Akn" secondAttribute="trailing" constant="50" id="2wn-k1-zT5"/>
                             <constraint firstItem="d6d-I6-hJn" firstAttribute="trailing" secondItem="NCc-WM-xot" secondAttribute="trailing" constant="30" id="Cos-uf-fET"/>
                             <constraint firstItem="NCc-WM-xot" firstAttribute="leading" secondItem="d6d-I6-hJn" secondAttribute="leading" constant="30" id="G9u-nO-cqB"/>
                             <constraint firstItem="0P3-Jg-iZm" firstAttribute="leading" secondItem="d6d-I6-hJn" secondAttribute="leading" constant="30" id="JFK-ud-zVr"/>
+                            <constraint firstItem="qiZ-we-We5" firstAttribute="leading" secondItem="d6d-I6-hJn" secondAttribute="leading" constant="50" id="KNO-K7-p4g"/>
                             <constraint firstAttribute="bottom" secondItem="r49-SQ-Yfe" secondAttribute="bottom" id="PMh-1I-aiH"/>
                             <constraint firstItem="qiZ-we-We5" firstAttribute="centerY" secondItem="c4n-cm-n53" secondAttribute="centerY" id="Pj9-pq-3Ea"/>
                             <constraint firstItem="d6d-I6-hJn" firstAttribute="bottom" secondItem="zxO-Zx-kUa" secondAttribute="bottom" constant="30" id="Qgc-Ty-uEd"/>
@@ -174,10 +182,12 @@
                             <constraint firstItem="d6d-I6-hJn" firstAttribute="bottom" secondItem="NCc-WM-xot" secondAttribute="bottom" constant="30" id="WgU-wi-kHj"/>
                             <constraint firstAttribute="trailing" secondItem="r49-SQ-Yfe" secondAttribute="trailing" id="YSo-Qb-idI"/>
                             <constraint firstItem="zHG-94-DZi" firstAttribute="top" secondItem="0P3-Jg-iZm" secondAttribute="bottom" constant="10" id="a3F-TG-Vb8"/>
+                            <constraint firstItem="NCc-WM-xot" firstAttribute="top" secondItem="OYH-Tx-Akn" secondAttribute="bottom" constant="70" id="cNq-At-DIe"/>
                             <constraint firstItem="zHG-94-DZi" firstAttribute="leading" secondItem="d6d-I6-hJn" secondAttribute="leading" constant="30" id="glZ-mW-7up"/>
                             <constraint firstItem="r49-SQ-Yfe" firstAttribute="leading" secondItem="c4n-cm-n53" secondAttribute="leading" id="k7b-1Q-wTU"/>
                             <constraint firstItem="qiZ-we-We5" firstAttribute="centerX" secondItem="c4n-cm-n53" secondAttribute="centerX" id="mva-HG-BHI"/>
                             <constraint firstItem="zxO-Zx-kUa" firstAttribute="leading" secondItem="d6d-I6-hJn" secondAttribute="leading" constant="30" id="odu-qv-okR"/>
+                            <constraint firstItem="d6d-I6-hJn" firstAttribute="trailing" secondItem="qiZ-we-We5" secondAttribute="trailing" constant="50" id="xnL-df-Mkz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d6d-I6-hJn"/>
                     </view>
@@ -185,6 +195,7 @@
                     <connections>
                         <outlet property="TableCellViewLeft" destination="qiZ-we-We5" id="dLe-yM-r0z"/>
                         <outlet property="activeProgressMarginBottom" destination="Qgc-Ty-uEd" id="PLX-Mu-i9c"/>
+                        <outlet property="addButton" destination="OYH-Tx-Akn" id="rBf-MV-8bd"/>
                         <outlet property="greyProgressMarginBottom" destination="WgU-wi-kHj" id="RaI-Sq-Fhh"/>
                     </connections>
                 </viewController>
@@ -256,12 +267,12 @@
         <scene sceneID="PNh-YZ-AAd">
             <objects>
                 <viewController id="cjs-QS-I8S" customClass="MealTableViewController" customModule="concept" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="s8M-V8-zJs">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="s8M-V8-zJs">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MealTableViewCell" rowHeight="81" id="kPv-o7-Xi5" userLabel="MealTableViewCell" customClass="MealTableViewCell" customModule="concept" customModuleProvider="target">
+                            <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MealTableViewCell" rowHeight="81" id="kPv-o7-Xi5" userLabel="MealTableViewCell" customClass="MealTableViewCell" customModule="concept" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="400" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kPv-o7-Xi5" id="hRO-8i-Xap">
@@ -275,10 +286,12 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="nDP-EH-0SF" firstAttribute="top" secondItem="hRO-8i-Xap" secondAttribute="topMargin" id="DDk-ht-jla"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.046772837529804212" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="nameLabel" destination="nDP-EH-0SF" id="8Iv-BJ-1fk"/>
                                 </connections>
@@ -292,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TvQ-1I-VW2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1040" y="1699.2503748125939"/>
+            <point key="canvasLocation" x="-1038" y="1734"/>
         </scene>
     </scenes>
     <resources>
@@ -302,5 +315,6 @@
         <image name="Progess_bar_disabled" width="456" height="29"/>
         <image name="Progress_bar_blue_violet" width="1438" height="60"/>
         <image name="Progress_bar_orange_red" width="456" height="29"/>
+        <image name="new_event" width="266" height="266"/>
     </resources>
 </document>
