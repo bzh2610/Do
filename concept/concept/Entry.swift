@@ -1,5 +1,15 @@
 
+
 import UIKit
+import CoreData
+
+
+
+class Reminder: NSManagedObject {
+    
+    @NSManaged var content: String?
+    
+}
 
 
 class Meal {

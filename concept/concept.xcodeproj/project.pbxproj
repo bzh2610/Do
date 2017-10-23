@@ -16,6 +16,7 @@
 		20722C4B1F77C1E900199681 /* conceptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20722C4A1F77C1E900199681 /* conceptUITests.swift */; };
 		2083DC651F9CF1D0008A1640 /* leftCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083DC641F9CF1D0008A1640 /* leftCardController.swift */; };
 		209331021F7DAFE7009A4498 /* cardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209331011F7DAFE7009A4498 /* cardsController.swift */; };
+		209B05FC1F9E556D002A7195 /* concept.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 209B05FA1F9E4EB2002A7195 /* concept.xcdatamodeld */; };
 		20DEC3861F9D312B00674BBF /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DEC3851F9D312B00674BBF /* MealTableViewCell.swift */; };
 		20DEC3881F9D321F00674BBF /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DEC3871F9D321F00674BBF /* Entry.swift */; };
 		20DEC38A1F9D370500674BBF /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DEC3891F9D370500674BBF /* MealTableViewController.swift */; };
@@ -54,6 +55,7 @@
 		20722C4C1F77C1E900199681 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2083DC641F9CF1D0008A1640 /* leftCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leftCardController.swift; sourceTree = "<group>"; };
 		209331011F7DAFE7009A4498 /* cardsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cardsController.swift; sourceTree = "<group>"; };
+		209B05FB1F9E4EB2002A7195 /* coredata.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coredata.xcdatamodel; sourceTree = "<group>"; };
 		20DEC3851F9D312B00674BBF /* MealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
 		20DEC3871F9D321F00674BBF /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		20DEC3891F9D370500674BBF /* MealTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				20722C311F77C1E900199681 /* Assets.xcassets */,
 				20722C331F77C1E900199681 /* LaunchScreen.storyboard */,
 				20722C361F77C1E900199681 /* Info.plist */,
+				209B05FA1F9E4EB2002A7195 /* concept.xcdatamodeld */,
 			);
 			path = concept;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				209B05FC1F9E556D002A7195 /* concept.xcdatamodeld in Sources */,
 				20DEC3881F9D321F00674BBF /* Entry.swift in Sources */,
 				20DEC3861F9D312B00674BBF /* MealTableViewCell.swift in Sources */,
 				2083DC651F9CF1D0008A1640 /* leftCardController.swift in Sources */,
@@ -576,6 +580,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		209B05FA1F9E4EB2002A7195 /* concept.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				209B05FB1F9E4EB2002A7195 /* coredata.xcdatamodel */,
+			);
+			currentVersion = 209B05FB1F9E4EB2002A7195 /* coredata.xcdatamodel */;
+			name = concept.xcdatamodeld;
+			path = ../../../../coredata/coredata/concept.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 20722C1F1F77C1E900199681 /* Project object */;
 }
