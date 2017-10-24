@@ -20,6 +20,7 @@
 		20DEC3861F9D312B00674BBF /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DEC3851F9D312B00674BBF /* MealTableViewCell.swift */; };
 		20DEC3881F9D321F00674BBF /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DEC3871F9D321F00674BBF /* Entry.swift */; };
 		20DEC38A1F9D370500674BBF /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DEC3891F9D370500674BBF /* MealTableViewController.swift */; };
+		20F27BD41F9F8B88001E6E23 /* newReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F27BD31F9F8B88001E6E23 /* newReminderController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		20DEC3851F9D312B00674BBF /* MealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
 		20DEC3871F9D321F00674BBF /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		20DEC3891F9D370500674BBF /* MealTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
+		20F27BD31F9F8B88001E6E23 /* newReminderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newReminderController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				20DEC3871F9D321F00674BBF /* Entry.swift */,
 				20DEC3851F9D312B00674BBF /* MealTableViewCell.swift */,
 				20DEC3891F9D370500674BBF /* MealTableViewController.swift */,
+				20F27BD31F9F8B88001E6E23 /* newReminderController.swift */,
 				20722C311F77C1E900199681 /* Assets.xcassets */,
 				20722C331F77C1E900199681 /* LaunchScreen.storyboard */,
 				20722C361F77C1E900199681 /* Info.plist */,
@@ -282,6 +285,7 @@
 				20DEC3861F9D312B00674BBF /* MealTableViewCell.swift in Sources */,
 				2083DC651F9CF1D0008A1640 /* leftCardController.swift in Sources */,
 				20722C2D1F77C1E900199681 /* ViewController.swift in Sources */,
+				20F27BD41F9F8B88001E6E23 /* newReminderController.swift in Sources */,
 				20DEC38A1F9D370500674BBF /* MealTableViewController.swift in Sources */,
 				20722C2B1F77C1E900199681 /* AppDelegate.swift in Sources */,
 				209331021F7DAFE7009A4498 /* cardsController.swift in Sources */,

@@ -154,8 +154,8 @@ class MealTableViewController: UITableViewController {
         /*CODE FONCTIONNEL, INSERE DANS LA CORE DATA*/
         
         
-        /*
-         if let bd =  NSEntityDescription.insertNewObject(forEntityName: "Reminder", into: moc) as? Reminder {
+        
+         /*if let bd =  NSEntityDescription.insertNewObject(forEntityName: "Reminder", into: moc) as? Reminder {
          
          bd.content="Aller à la plage"
          

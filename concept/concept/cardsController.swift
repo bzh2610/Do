@@ -118,7 +118,17 @@ class cardsController: UIViewController {
 
     }
     
-    @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
+
+    
+    @objc func handleTapGesture(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        print("∞~~~~~~~")
+        print(touch.view)
+        var result :Bool = false
+
+            if true/*touch.view!.superview!.superclass! .isSubclass(of: newReminderController.self) {
+                print("Canceled")
+                return false
+            }else*/{
         if gestureRecognizer.state == UIGestureRecognizerState.recognized
         {
             //Card clicked
@@ -140,6 +150,8 @@ class cardsController: UIViewController {
                                                     object: nil,
                                                     userInfo: ["active": true])
                 }
+                print("Not a child of leftCard")
+                result = true
             }
             
             else if(rightCard.frame.origin.x > 0 && rightCard.frame.origin.x+rightCard.bounds.width < screenSize.width){
@@ -159,15 +171,26 @@ class cardsController: UIViewController {
                                                     object: nil,
                                                     userInfo: ["active": true])
                 }
+                print("Not a child of leftCard")
+                result = true
+            }else{
+                print("CANCELED")
+                result = false
             }
            
             
 
             
         }
+       
+        }
+        return result
     }
     
-    @objc func handlePanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
+    @objc func handlePanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+     
+        
+    
         let velocity = gestureRecognizer.velocity(in: self.view)
         let position = gestureRecognizer.translation(in: self.view)
         
@@ -178,17 +201,20 @@ class cardsController: UIViewController {
         }else if gestureRecognizer.state == UIGestureRecognizerState.ended {
            swipe_card(direction: position.x/10, velocity: velocity.x)
         }
+        return true
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGestureRecognizer))
+        panGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(panGestureRecognizer)
         
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:
             #selector(handleTapGesture))
+        tapGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(tapGestureRecognizer) //détecte les clics sur
 
     
@@ -205,8 +231,6 @@ class cardsController: UIViewController {
         self.rightCard.frame.origin.y = (self.view.frame.size.height  - self.rightCard.bounds.minY)*0.5
         self.rightCard.frame.origin.x = (self.view.frame.size.width  - self.rightCard.frame.size.width)*0.9
 
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -214,15 +238,5 @@ class cardsController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

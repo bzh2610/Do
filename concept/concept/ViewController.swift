@@ -48,140 +48,10 @@ class ViewController: UIViewController {
     var top_option_activated = false
     var cardsMargintop : CGFloat = 0.0;
 
-   @objc func handlePanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
-        let velocity = gestureRecognizer.velocity(in: self.view)
-        
-       // print(velocity.x)
-        if gestureRecognizer.state == UIGestureRecognizerState.changed {
-            if velocity.x > 100.0 {
-                // In this case the direction is generally towards Right.
-                // Below are specific cases regarding the vertical movement of the gesture.
-                
-                if velocity.y > 100.0 {
-                    // Movement from Top-Left to Bottom-Right.
-                    panDirection = PanDirections.TopLeftToBottomRight
-                }
-                else if velocity.y < -100.0 {
-                    // Movement from Bottom-Left to Top-Right.
-                    panDirection = PanDirections.BottomLeftToTopRight
-                }
-                else {
-                    // Movement towards Right.
-                    print("RIGHT")
-                    panDirection = PanDirections.Right
-                    
-                    
-                    
-                    
-                    
-                    //cardsController().leftCard.frame.origin.x = -2000
-                    //UIImageView.animate(withDuration: 1.2) {
-                     //   self.view.layoutIfNeeded()
-                    //}
-                   // cardsController().swipe_card(direction: -1)
-                    //cardsController.swipe(-1)//(direction: -1)
-                }
-            }
-            else if velocity.x < -100.0 {
-                // In this case the direction is generally towards Left.
-                // Below are specific cases regarding the vertical movement of the gesture.
-                
-                if velocity.y > 100.0 {
-                    // Movement from Top-Right to Bottom-Left.
-                    panDirection = PanDirections.TopRightToBottomLeft
-                }
-                else if velocity.y < -100.0 {
-                    // Movement from Bottom-Right to Top-Left.
-                    panDirection = PanDirections.BottomRightToTopLeft
-                }
-                else {
-                    // Movement towards Left.
-                    panDirection = PanDirections.Left
-                }
-            }
-            else {
-                // In this case the movement is mostly vertical (towards bottom or top).
-                
-                if velocity.y > 10.0 {
-                    // Movement towards Bottom.
-                    panDirection = PanDirections.Bottom
-                    
-                    if(!top_option_activated){
-                        Image_top.constant = 0
-                  [self.view.bringSubview(toFront: Slide_image)]
-                    UIImageView.animate(withDuration: 1.2) {
-                        self.view.layoutIfNeeded()
-                    }
-                    }
-                    
-                  //  Image_top.animate(withDuration: 2.0, a)
-                 /*   top_view.animate(withDuration: 2.0, animations: {
-                        //Do something with launchScreenBG here. For example:
-                        self.launchScreenBG.alpha = 0.0
-                    })
- 
- */
-                    
-                }
-                else if velocity.y < -10.0 {
-                    // Movement towards Top.
-                    panDirection = PanDirections.Top
-                    
-                    Image_top.constant = -400
-                    
-                    UIImageView.animate(withDuration: 1.2) {
-                        self.view.layoutIfNeeded()
-                    }
-                }
-                else {
-                    // Do nothing.
-                    panDirection = nil
-                }
-            }
-        }
-        else if gestureRecognizer.state == UIGestureRecognizerState.ended {
-            changeGradientDirection()
-        }
-    }
     
     
-    func changeGradientDirection() {
-        if panDirection != nil {
-            switch panDirection.rawValue {
-            case PanDirections.Right.rawValue:
-                gradientLayer.startPoint = CGPoint(x: 0.0, y:0.5)
-                gradientLayer.endPoint = CGPoint(x: 1.0, y: -0.5)
-                
-            case PanDirections.Left.rawValue:
-                gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.5)
-                gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.5)
-                
-            case PanDirections.Bottom.rawValue:
-                gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
-                gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-                
-            case PanDirections.Top.rawValue:
-                gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-                gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-                
-            case PanDirections.TopLeftToBottomRight.rawValue:
-                gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-                gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-                
-            case PanDirections.TopRightToBottomLeft.rawValue:
-                gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.0)
-                gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
-                
-            case PanDirections.BottomLeftToTopRight.rawValue:
-                gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
-                gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
-                
-            default:
-                gradientLayer.startPoint = CGPoint(x: 1.0, y: 1.0)
-                gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.0)
-            }
-        }
-    }
+    
+   
     
     func setHomeStatus(_visible : Bool = true){
         
@@ -252,9 +122,7 @@ class ViewController: UIViewController {
     }
     
     
-    @objc func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
-       // change_bg_color();
-    }
+    
     
     
     func createColorSets() {
@@ -301,31 +169,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let screenSize = UIScreen.main.bounds
         
-        
-        
         createColorSets()
-        // Do any additional setup after loading the view, typically from a nib.
-        //UITapGestureRecognizer(target: self, action: ViewController.handleTapGesture(_:))
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:
-            #selector(handleTapGesture))
-        self.view.addGestureRecognizer(tapGestureRecognizer) //détecte les clics sur l'UIVIewController
-        
-      //  let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGestureRecognizer))
-     //   self.Card_Slideshow_View.addGestureRecognizer(panGestureRecognizer)
-        //detecte les clics sur cardslideshow
-        
-        
-        
-        
-        
-   
-        
-      
-        
-        
-        
-       // print(Card_Slideshow_View.top)
-        
     }
     
     
