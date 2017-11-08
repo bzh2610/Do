@@ -40,14 +40,36 @@ class newReminderController: UIViewController {
     
     @IBOutlet weak var btn: UIButton!
     
+    
+    var keyboardHeight: CGFloat=0
 
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSizeTemp = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if(keyboardSizeTemp.height > CGFloat(0.00)){
+                keyboardHeight = keyboardSizeTemp.height
+        }
+            print(keyboardHeight)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addTopKeyboard"),
+                                            object: nil,
+                                            userInfo: ["Height": keyboardHeight])
+        }
+    }
+    
+
+    
+
+    @IBAction func resignKeyboard(_ sender: AnyObject) {
+         sender.resignFirstResponder()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hideKeyboard"),
+                                        object: nil )
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.isUserInteractionEnabled=true
-        print(self.view.isUserInteractionEnabled)
-       
+
         
+     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 
     }
     

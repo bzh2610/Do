@@ -53,7 +53,7 @@ class MealTableViewController: UITableViewController {
         // Fetches the appropriate meal for the data source layout.
         let meal = meals[indexPath.row]
         
-        cell.nameLabel.text = meal.content
+        //cell.nameLabel.text = meal.content
   
       //  cell.photoImageView.image = meal.photo
        // cell.ratingControl.rating = meal.rating

@@ -21,22 +21,45 @@ class cardsController: UIViewController {
     @IBOutlet weak var LeftGreyBarMarginBottom: NSLayoutConstraint!
     let screenSize = UIScreen.main.bounds
     var last_swipe_update :TimeInterval = 0.0
-    
+    var currentCard : UIView!
+    var hiddenCard : UIView!
 
     func swipe_card(direction:CGFloat, velocity:CGFloat){
     
+        print("swipe_card()")
 
         if(last_swipe_update > 2){
             last_swipe_update=0;
         }
-
-        UIView.animate(withDuration: 0.2) {
+        if(currentCard == leftCard){
+            hiddenCard=rightCard
+        }else{
+            hiddenCard=leftCard
+        }
+        
+        
+        if(velocity > 50){
+   
+            self.hiddenCard.frame.origin.x=self.currentCard.frame.origin.x-self.currentCard.bounds.width - UIScreen.main.bounds.width*0.05
             
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "switchSmallCard"),
+        }
+        if(velocity < 50){
+            
+            self.hiddenCard.frame.origin.x=self.currentCard.frame.origin.x + self.currentCard.bounds.width + UIScreen.main.bounds.width*0.05
+            
+            
+        }
+        
+        
+        UIView.animate(withDuration: 1) {
+            
+           
+            
+         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "switchSmallCard"),
                                             object: nil,
                                             userInfo: ["active": true])
-            
+ 
             self.leftCard.frame.size.width = UIScreen.main.bounds.width*0.9
             self.leftCard.frame.size.height = (self.view.frame.size.height  - self.leftCard.bounds.minY)*0.5
             self.leftCard.frame.origin.y = (self.view.frame.size.height  - self.leftCard.bounds.minY)*0.5
@@ -44,29 +67,30 @@ class cardsController: UIViewController {
             self.rightCard.frame.size.width = UIScreen.main.bounds.width*0.9
             self.rightCard.frame.size.height = (self.view.frame.size.height  - self.rightCard.bounds.minY)*0.5
             self.rightCard.frame.origin.y = (self.view.frame.size.height  - self.rightCard.bounds.minY)*0.5
+
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeHomeStatus"),
+           NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeHomeStatus"),
                                             object: nil,
                                             userInfo: ["Visible": true])
                     if(velocity > 50){ // Vers la droite
                         
                        // ViewController().change_bg_color()
                         print("droite")
-                        if(self.leftCard.frame.origin.x < -self.leftCard.frame.width ){ //Complètement caché
-                            self.leftCard.frame.origin.x = -self.leftCard.frame.width//->bord droit de la carte
+                        if(self.currentCard.frame.origin.x < -self.currentCard.frame.width ){ //Complètement caché
+                            self.currentCard.frame.origin.x = -self.currentCard.frame.width//->bord droit de la carte
                            
                             print("->")
-                        }else if(self.leftCard.frame.origin.x < 0 ){ //bord droit
-                            self.leftCard.frame.origin.x = UIScreen.main.bounds.width*0.05//visible
+                        }else if(self.currentCard.frame.origin.x < 0 ){ //bord droit
+                            self.currentCard.frame.origin.x = UIScreen.main.bounds.width*0.05//visible
                            
                               print(" = ")
-                        } else if(self.leftCard.frame.origin.x <= UIScreen.main.bounds.width*0.2 ){ //bord droit
-                            self.leftCard.frame.origin.x = UIScreen.main.bounds.width*1//
+                        } else if(self.currentCard.frame.origin.x <= UIScreen.main.bounds.width*0.2 ){ //bord droit
+                            self.currentCard.frame.origin.x = UIScreen.main.bounds.width*1//
                             
                               print("-->")
                         }else{
                               print("---------->")
-                            self.leftCard.frame.origin.x = UIScreen.main.bounds.width*2
+                            self.currentCard.frame.origin.x = UIScreen.main.bounds.width*2
                           
                         }
                         
@@ -74,6 +98,12 @@ class cardsController: UIViewController {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeBackgroundColor"),
                                                         object: nil,
                                                         userInfo: ["Sens": -1])
+        
+                        self.hiddenCard.frame.origin.x=self.currentCard.frame.origin.x-self.currentCard.bounds.width - UIScreen.main.bounds.width*0.05
+                       
+                        
+                        
+                    
                         
                     }else if(velocity < -50){// <--
                         
@@ -82,27 +112,34 @@ class cardsController: UIViewController {
                                                         userInfo: ["Sens": 1])
                         
                       //ViewController().change_bg_color(_sens: -1)
-                            if(self.leftCard.frame.origin.x >= UIScreen.main.bounds.width){
+                            if(self.currentCard.frame.origin.x >= UIScreen.main.bounds.width){
                                   print("----------<")
                                 
-                                self.leftCard.frame.origin.x = UIScreen.main.bounds.width*0.05
+                                self.currentCard.frame.origin.x = UIScreen.main.bounds.width*0.05
                                
-                            }else if(self.leftCard.frame.origin.x > 0){
-                                self.leftCard.frame.origin.x = -self.leftCard.frame.width
+                            }else if(self.currentCard.frame.origin.x > 0){
+                                self.currentCard.frame.origin.x = -self.currentCard.frame.width
                                
                             }else{
-                                 self.leftCard.frame.origin.x = -self.leftCard.frame.width*2
+                                 self.currentCard.frame.origin.x = -self.currentCard.frame.width*2
                             
                             }
                         
+                       self.hiddenCard.frame.origin.x=self.currentCard.frame.origin.x+self.currentCard.bounds.width + UIScreen.main.bounds.width*0.05
                         }
-            self.rightCard.frame.origin.x=self.leftCard.frame.origin.x+self.leftCard.bounds.width + UIScreen.main.bounds.width*0.05
-            //ViewController().change_bg_color();
+                       //ViewController().change_bg_color();
            
            
+            
             //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopSoundNotification"), object: nil)
 
                 } //End of animation
+        
+        if(currentCard == leftCard){
+            currentCard=rightCard
+        }else{
+            currentCard=leftCard
+        }
         
         
         //print(velocity)
@@ -111,35 +148,26 @@ class cardsController: UIViewController {
          leftCard.updateConstraints()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        leftCard.frame.size.width = (screenSize.width)
-        leftCard.frame.origin.x = (screenSize.width*0.1)
-
-    }
     
 
     
-    @objc func handleTapGesture(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+    @objc func handleTapGesture(gestureRecognizer: UIGestureRecognizer){
         print("∞~~~~~~~")
-        print(touch.view)
-        var result :Bool = false
 
-            if true/*touch.view!.superview!.superclass! .isSubclass(of: newReminderController.self) {
-                print("Canceled")
-                return false
-            }else*/{
+
+
         if gestureRecognizer.state == UIGestureRecognizerState.recognized
         {
             //Card clicked
         
             if(leftCard.frame.origin.x > 0 && leftCard.frame.origin.x+leftCard.bounds.width < screenSize.width){
-                leftCard.frame.size.height = (screenSize.height)+100
-                leftCard.frame.size.width = (screenSize.width)+30
+                leftCard.frame.size.height = (screenSize.height)+70
+                leftCard.frame.size.width = (screenSize.width)+35
                 UIView.animate(withDuration: 1.2) {
                     //ViewController().hideUserInfo()
                     print( ScreenInfo.shared.cardsMargintop)
                     self.leftCard.frame.origin.y = -ScreenInfo.shared.cardsMargintop-70
+                   
                     self.leftCard.frame.origin.x = -12
                     self.view.layoutIfNeeded()
                   
@@ -151,7 +179,7 @@ class cardsController: UIViewController {
                                                     userInfo: ["active": true])
                 }
                 print("Not a child of leftCard")
-                result = true
+
             }
             
             else if(rightCard.frame.origin.x > 0 && rightCard.frame.origin.x+rightCard.bounds.width < screenSize.width){
@@ -172,10 +200,10 @@ class cardsController: UIViewController {
                                                     userInfo: ["active": true])
                 }
                 print("Not a child of leftCard")
-                result = true
+               
             }else{
                 print("CANCELED")
-                result = false
+            
             }
            
             
@@ -183,13 +211,12 @@ class cardsController: UIViewController {
             
         }
        
-        }
-        return result
+      
     }
     
-    @objc func handlePanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    @objc func handlePanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer){
      
-        
+        print("handlePanGestureRecognizer()")
     
         let velocity = gestureRecognizer.velocity(in: self.view)
         let position = gestureRecognizer.translation(in: self.view)
@@ -201,11 +228,11 @@ class cardsController: UIViewController {
         }else if gestureRecognizer.state == UIGestureRecognizerState.ended {
            swipe_card(direction: position.x/10, velocity: velocity.x)
         }
-        return true
     }
     
     
     override func viewDidLoad() {
+         print("CardsController -> viewdidload()")
         super.viewDidLoad()
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGestureRecognizer))
         panGestureRecognizer.delegate = self
@@ -218,25 +245,30 @@ class cardsController: UIViewController {
         self.view.addGestureRecognizer(tapGestureRecognizer) //détecte les clics sur
 
     
-        
-        // Set elements
-        self.leftCard.frame.size.width = UIScreen.main.bounds.width*0.9
-        self.leftCard.frame.size.height = (self.view.frame.size.height  - self.leftCard.bounds.minY)*0.5
-        self.leftCard.frame.origin.y = (self.view.frame.size.height  - self.leftCard.bounds.minY)*0.5
-        
-        
-        
-        self.rightCard.frame.size.width = UIScreen.main.bounds.width*0.9
-        self.rightCard.frame.size.height = (self.view.frame.size.height  - self.leftCard.bounds.minY)*0.5
-        self.rightCard.frame.origin.y = (self.view.frame.size.height  - self.rightCard.bounds.minY)*0.5
-        self.rightCard.frame.origin.x = (self.view.frame.size.width  - self.rightCard.frame.size.width)*0.9
-
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        currentCard=leftCard
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "switchSmallCard"),
+                                        object: nil,
+                                        userInfo: ["active": true])
+        
+        self.leftCard.frame.size.width = UIScreen.main.bounds.width*0.9
+        self.leftCard.frame.size.height = (self.view.frame.size.height  - self.leftCard.bounds.minY)*0.5
+        self.leftCard.frame.origin.y = (self.view.frame.size.height  - self.leftCard.bounds.minY)*0.5
+        
+        self.rightCard.frame.size.width = UIScreen.main.bounds.width*0.9
+        self.rightCard.frame.size.height = (self.view.frame.size.height  - self.rightCard.bounds.minY)*0.5
+        self.rightCard.frame.origin.y = (self.view.frame.size.height  - self.rightCard.bounds.minY)*0.5
+        self.rightCard.frame.origin.x=self.leftCard.frame.origin.x+self.leftCard.bounds.width + UIScreen.main.bounds.width*0.05
+        
+    }
+
     
 
 }

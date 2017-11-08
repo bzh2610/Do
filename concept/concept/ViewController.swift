@@ -28,6 +28,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var welcome_text: UILabel!
   
+    @IBOutlet weak var settings_icon: UIImageView!
     @IBOutlet weak var cardsControllerMarginBottom: NSLayoutConstraint!
     @IBOutlet weak var cardsControllerMarginTop: NSLayoutConstraint!
     enum PanDirections: Int {
@@ -175,6 +176,7 @@ class ViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        print("ViewController : viewWillAppear")
         ScreenInfo.shared.cardsMargintop=cardsControllerMarginTop.constant
         print( ScreenInfo.shared.cardsMargintop)
         print("constraint  : \(cardsControllerMarginTop.constant)");
@@ -194,6 +196,7 @@ NotificationCenter.default.addObserver(self,
         createGradientLayer()
          self.view.bringSubview(toFront: Card_Slideshow_View)
          self.view.bringSubview(toFront: welcome_text)
+        self.view.bringSubview(toFront: settings_icon)
          self.view.bringSubview(toFront: ProfilePicture)
         self.welcome_text.textColor = UIColor.white
 
