@@ -33,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0jG-7C-OJM">
-                                <rect key="frame" x="0.0" y="220" width="375" height="373"/>
+                                <rect key="frame" x="0.0" y="336" width="375" height="257"/>
                                 <color key="backgroundColor" red="1" green="0.2698378562" blue="0.25447591145833331" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="1ot-4H-sdi" kind="embed" id="Bde-vu-4UK"/>
@@ -47,31 +47,32 @@
                                     <constraint firstAttribute="width" constant="50" id="MFs-9S-YpA"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings" translatesAutoresizingMaskIntoConstraints="NO" id="maE-kO-BGf">
-                                <rect key="frame" x="325" y="50" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boz-d6-iVl">
+                                <rect key="frame" x="325" y="60" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="5dV-OO-78w"/>
-                                    <constraint firstAttribute="height" constant="30" id="Ycn-lJ-hTQ"/>
+                                    <constraint firstAttribute="height" constant="30" id="pG5-eS-tX6"/>
+                                    <constraint firstAttribute="width" constant="30" id="si4-Da-I51"/>
                                 </constraints>
-                            </imageView>
+                                <state key="normal" image="settings"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2KE-a2-b05" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-400" id="5Vo-n4-mZS"/>
+                            <constraint firstItem="boz-d6-iVl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="9ma-B9-GfK"/>
                             <constraint firstItem="2KE-a2-b05" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="GtX-b7-vjA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0jG-7C-OJM" secondAttribute="trailing" id="InF-wc-GCk"/>
-                            <constraint firstAttribute="trailing" secondItem="maE-kO-BGf" secondAttribute="trailing" constant="20" id="Lhu-aZ-28V"/>
                             <constraint firstItem="GrK-v1-ks9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="NJL-Ag-h90"/>
                             <constraint firstItem="2KE-a2-b05" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ol6-Na-NxV"/>
                             <constraint firstItem="0jG-7C-OJM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UzQ-E7-uCJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mID-gN-jdY" secondAttribute="trailing" id="XVF-A5-j3f"/>
                             <constraint firstItem="GrK-v1-ks9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="bWH-wb-U9z"/>
-                            <constraint firstItem="maE-kO-BGf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="50" id="cjx-ax-mAY"/>
                             <constraint firstItem="0jG-7C-OJM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dWU-6i-JQG"/>
                             <constraint firstItem="mID-gN-jdY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="eCL-n0-zIt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0jG-7C-OJM" secondAttribute="bottom" constant="30" id="f9v-fa-LHu"/>
+                            <constraint firstAttribute="trailing" secondItem="boz-d6-iVl" secondAttribute="trailing" constant="20" id="kID-Jn-Eb8"/>
                             <constraint firstItem="mID-gN-jdY" firstAttribute="top" secondItem="GrK-v1-ks9" secondAttribute="bottom" constant="20" id="khP-d0-klB"/>
-                            <constraint firstItem="0jG-7C-OJM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="neH-np-zer"/>
+                            <constraint firstItem="0jG-7C-OJM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="336" id="neH-np-zer"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -84,7 +85,7 @@
                         <outlet property="Slide_image" destination="2KE-a2-b05" id="rmn-c0-k0B"/>
                         <outlet property="cardsControllerMarginBottom" destination="f9v-fa-LHu" id="4Fi-jy-aM7"/>
                         <outlet property="cardsControllerMarginTop" destination="neH-np-zer" id="UKs-cZ-Uw5"/>
-                        <outlet property="settings_icon" destination="maE-kO-BGf" id="h1l-iW-Lab"/>
+                        <outlet property="settings_icon" destination="boz-d6-iVl" id="aZy-uz-Xjl"/>
                         <outlet property="welcome_text" destination="mID-gN-jdY" id="j70-69-2Xv"/>
                     </connections>
                 </viewController>

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class cardsController: UIViewController {
 
 
@@ -24,9 +25,11 @@ class cardsController: UIViewController {
     var currentCard : UIView!
     var hiddenCard : UIView!
 
-    func swipe_card(direction:CGFloat, velocity:CGFloat){
+    func swipe_card(direction:CGPoint, velocity:CGPoint){
     
+        print(velocity)
         print("swipe_card()")
+        
 
         if(last_swipe_update > 2){
             last_swipe_update=0;
@@ -37,14 +40,29 @@ class cardsController: UIViewController {
             hiddenCard=leftCard
         }
         
+        if(currentCard.frame.height > UIScreen.main.bounds.height*0.8){
+            print("Full card ~~~ Calculating position from device constant")
+            if(velocity.x > 50){
+                
+                self.hiddenCard.frame.origin.x=UIScreen.main.bounds.width*0.05-UIScreen.main.bounds.width*0.9 - UIScreen.main.bounds.width*0.05
+                
+                
+            }
+            else if(velocity.x < 50){
+                
+                self.hiddenCard.frame.origin.x=UIScreen.main.bounds.width*0.05+UIScreen.main.bounds.width*0.9 + UIScreen.main.bounds.width*0.05
+                
+                
+            }
+        }
         
-        if(velocity > 50){
+        else if(velocity.x > 50){
    
             self.hiddenCard.frame.origin.x=self.currentCard.frame.origin.x-self.currentCard.bounds.width - UIScreen.main.bounds.width*0.05
             
             
         }
-        if(velocity < 50){
+        else if(velocity.x < 50){
             
             self.hiddenCard.frame.origin.x=self.currentCard.frame.origin.x + self.currentCard.bounds.width + UIScreen.main.bounds.width*0.05
             
@@ -52,9 +70,11 @@ class cardsController: UIViewController {
         }
         
         
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             
-           
+            if(self.currentCard.frame.height > UIScreen.main.bounds.height*0.8){
+                self.currentCard.frame.origin.x = UIScreen.main.bounds.width*0.05
+            }
             
          NotificationCenter.default.post(name: NSNotification.Name(rawValue: "switchSmallCard"),
                                             object: nil,
@@ -72,7 +92,22 @@ class cardsController: UIViewController {
            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeHomeStatus"),
                                             object: nil,
                                             userInfo: ["Visible": true])
-                    if(velocity > 50){ // Vers la droite
+            
+            
+            
+            if(velocity.y > 1000){
+                
+                
+                 //visible
+                
+                if(self.currentCard == self.leftCard){
+                    self.currentCard=self.rightCard
+                }else{
+                    self.currentCard=self.leftCard
+                }
+                
+            }
+                   else if(velocity.x > 50){ // Vers la droite
                         
                        // ViewController().change_bg_color()
                         print("droite")
@@ -105,7 +140,7 @@ class cardsController: UIViewController {
                         
                     
                         
-                    }else if(velocity < -50){// <--
+                    }else if(velocity.x < -50){// <--
                         
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeBackgroundColor"),
                                                         object: nil,
@@ -154,21 +189,27 @@ class cardsController: UIViewController {
     @objc func handleTapGesture(gestureRecognizer: UIGestureRecognizer){
         print("∞~~~~~~~")
 
+        if(currentCard == leftCard){
+            hiddenCard=rightCard
+        }else{
+            hiddenCard=leftCard
+        }
 
 
         if gestureRecognizer.state == UIGestureRecognizerState.recognized
         {
             //Card clicked
         
-            if(leftCard.frame.origin.x > 0 && leftCard.frame.origin.x+leftCard.bounds.width < screenSize.width){
-                leftCard.frame.size.height = (screenSize.height)+70
-                leftCard.frame.size.width = (screenSize.width)+35
+            if(currentCard.frame.origin.x > 0 && currentCard.frame.origin.x+currentCard.bounds.width < screenSize.width){
+                currentCard.frame.size.height = (screenSize.height)+100
+                currentCard.frame.size.width = (screenSize.width)+35
                 UIView.animate(withDuration: 1.2) {
                     //ViewController().hideUserInfo()
                     print( ScreenInfo.shared.cardsMargintop)
-                    self.leftCard.frame.origin.y = -ScreenInfo.shared.cardsMargintop-70
+                    self.currentCard.frame.origin.y = -ScreenInfo.shared.cardsMargintop-50
+                    
                    
-                    self.leftCard.frame.origin.x = -12
+                    self.currentCard.frame.origin.x = -12
                     self.view.layoutIfNeeded()
                   
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeHomeStatus"),
@@ -181,31 +222,6 @@ class cardsController: UIViewController {
                 print("Not a child of leftCard")
 
             }
-            
-            else if(rightCard.frame.origin.x > 0 && rightCard.frame.origin.x+rightCard.bounds.width < screenSize.width){
-                
-                rightCard.frame.size.height = (screenSize.height)+100
-                rightCard.frame.size.width = (screenSize.width)+30
-                UIView.animate(withDuration: 1.2) {
-                    //ViewController().hideUserInfo()
-                    print( ScreenInfo.shared.cardsMargintop)
-                    self.rightCard.frame.origin.y = -ScreenInfo.shared.cardsMargintop-70
-                    self.rightCard.frame.origin.x = -12
-                    self.view.layoutIfNeeded()
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeHomeStatus"),
-                                                    object: nil,
-                                                    userInfo: ["Visible": false])
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "switchFullCard"),
-                                                    object: nil,
-                                                    userInfo: ["active": true])
-                }
-                print("Not a child of leftCard")
-               
-            }else{
-                print("CANCELED")
-            
-            }
-           
             
 
             
@@ -226,7 +242,7 @@ class cardsController: UIViewController {
           //  swipe_card(direction: position.x/10, velocity: velocity.x)
            // }
         }else if gestureRecognizer.state == UIGestureRecognizerState.ended {
-           swipe_card(direction: position.x/10, velocity: velocity.x)
+           swipe_card(direction: position, velocity: velocity)
         }
     }
     

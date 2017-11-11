@@ -26,6 +26,20 @@ class leftCardController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIButton!
     
+    
+    @objc func switchSmallCard(){
+        
+        print("Small card");
+        addButton.isHidden=true
+        cardTitleMarginBottom.constant = 70
+        greyProgressMarginBottom.constant=30
+        TableCellViewLeft.isHidden = true
+        addButtonKeyboard.isHidden=true
+        activeProgressMarginBottom.constant=30
+        cancelButton.isHidden=true
+        
+    }
+    
     @objc func switchFullCard(){
         ///loadSampleMeals()
         //tableView.reloadData()
@@ -119,18 +133,7 @@ class leftCardController: UIViewController {
     }
     
     
-    @objc func switchSmallCard(){
-        
-        print("Small card");
-          addButton.isHidden=true
-         cardTitleMarginBottom.constant = 70
-        greyProgressMarginBottom.constant=30
-         TableCellViewLeft.isHidden = true
-               addButtonKeyboard.isHidden=true
-        activeProgressMarginBottom.constant=30
-        cancelButton.isHidden=true
-        
-    }
+   
     
     
     

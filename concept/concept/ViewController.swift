@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var welcome_text: UILabel!
   
-    @IBOutlet weak var settings_icon: UIImageView!
+    @IBOutlet weak var settings_icon: UIButton!
     @IBOutlet weak var cardsControllerMarginBottom: NSLayoutConstraint!
     @IBOutlet weak var cardsControllerMarginTop: NSLayoutConstraint!
     enum PanDirections: Int {
@@ -199,7 +199,7 @@ NotificationCenter.default.addObserver(self,
         self.view.bringSubview(toFront: settings_icon)
          self.view.bringSubview(toFront: ProfilePicture)
         self.welcome_text.textColor = UIColor.white
-
+        settings_icon.setImage(#imageLiteral(resourceName: "settings_highlight"), for: UIControlState.highlighted)
         setFullSizeView()
        // self.view.addSubview(v)
     }
