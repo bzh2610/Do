@@ -16,11 +16,22 @@ class MealTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load the sample data.
         loadSampleMeals()
+        
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.reloadTableView),
+                                               name: NSNotification.Name(rawValue: "reloadTableView"),
+                                               object: nil)
+        
+        
     }
     
+    @objc func reloadTableView(){
+        loadSampleMeals()
+        tableView.reloadData()
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -52,8 +63,9 @@ class MealTableViewController: UITableViewController {
         
         // Fetches the appropriate meal for the data source layout.
         let meal = meals[indexPath.row]
+      //  cell.content = Reminder.content
         
-        //cell.nameLabel.text = meal.content
+        cell.nameLabel.text = meal.content
   
       //  cell.photoImageView.image = meal.photo
        // cell.ratingControl.rating = meal.rating
@@ -109,7 +121,7 @@ class MealTableViewController: UITableViewController {
     
     //MARK: Private Methods
     
-    private func loadSampleMeals() {
+    public func loadSampleMeals() {
         
         /*
          
@@ -154,10 +166,10 @@ class MealTableViewController: UITableViewController {
         /*CODE FONCTIONNEL, INSERE DANS LA CORE DATA*/
         
         
-        
-         /*if let bd =  NSEntityDescription.insertNewObject(forEntityName: "Reminder", into: moc) as? Reminder {
+        /*
+         if let bd =  NSEntityDescription.insertNewObject(forEntityName: "Reminder", into: moc) as? Reminder {
          
-         bd.content="Aller à la plage"
+         bd.content="🍉"
          
          do {
          try moc.save()
@@ -167,8 +179,8 @@ class MealTableViewController: UITableViewController {
          
          }
          
-         }*/
-        
+         }
+        */
         
         /*FETCH*/
         

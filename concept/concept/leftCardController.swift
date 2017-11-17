@@ -48,8 +48,7 @@ class leftCardController: UIViewController {
         addButton.isHidden=false
         cardTitleMarginBottom.constant = UIScreen.main.bounds.height-250
         greyProgressMarginBottom.constant=150
-
-        
+        cancelButton.isHidden=false
         activeProgressMarginBottom.constant=150
 
         TableCellViewLeft.isHidden = false
@@ -57,16 +56,37 @@ class leftCardController: UIViewController {
     }
     
     @IBAction func HIDE(_ sender: UIButton) {
+         if(newReminder.isHidden == false){
         newReminder.isHidden=true
+       // cancelButton.isHidden=true
         TableCellViewLeft.isHidden=false
+         }else{
+            switchSmallCard()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "switchSmallCardUI"),
+                                            object: nil)
+            
+             cancelButton.isHidden=true
+        }
     }
     
     @IBAction func SHOW(_ sender: UIButton) {
-        
         TableCellViewLeft.isHidden=true
-        newReminder.isHidden = false
+        cancelButton.isHidden=false
+        
+        
+        //self.TableCellViewLeft.bringSubview(toFront: newReminder)
         //newReminder.becomeFirstResponder()
         print("Image Tapped")
+        
+        
+        
+        if(newReminder.isHidden == false){
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addReminder"),
+                                            object: nil)
+            print("Add reminder to NSDATA....")
+        }
+        
+        newReminder.isHidden = false
     }
     
     @objc func hideKeyboard(){
@@ -74,8 +94,10 @@ class leftCardController: UIViewController {
         addButtonMarginBottom.constant = 200
         addButton.setBackgroundImage(#imageLiteral(resourceName: "new_event"), for: UIControlState.normal)
         addButtonKeyboardWidth.constant = 0
+
+        addButtonKeyboardBottomMargin.constant = -10
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
     }
@@ -133,7 +155,20 @@ class leftCardController: UIViewController {
     }
     
     
-   
+    @objc func reloadTableView(){
+        if(newReminder.isHidden == false){
+            newReminder.isHidden=true
+            // cancelButton.isHidden=true
+            TableCellViewLeft.isHidden=false
+        }else{
+            switchSmallCard()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "switchSmallCardUI"),
+                                            object: nil)
+            
+            cancelButton.isHidden=true
+        }
+        
+    }
     
     
     
@@ -163,6 +198,13 @@ class leftCardController: UIViewController {
                                                    name: NSNotification.Name(rawValue: "hideKeyboard"),
                                                    object: nil)
 
+            
+            
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(self.reloadTableView),
+                                                   name: NSNotification.Name(rawValue: "reloadTableView"),
+                                                   object: nil) // Fired at the same time as data refresh for tableview in MealTableViewController, here it just swtiches view.
+            
             
             
     }

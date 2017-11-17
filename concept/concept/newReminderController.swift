@@ -8,9 +8,15 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 // Put this piece of code anywhere you like
 extension UIViewController {
+
+    
+
+    
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -22,13 +28,25 @@ extension UIViewController {
     }
 }
 
-
-extension cardsController : UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touch.view!.superview!.superclass! .isSubclass(of: newReminderController.self) {
-            return false
-        }
+extension cardsController :  UIGestureRecognizerDelegate {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+      //  if( touch.view!.superview!.superclass! .isSubclass(of: newReminderController.self)){
+            //print("false")
+          //  return false
+       // }
+            print("True")
+            return true
+        
+    }
+    
+    private func gestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+     //   if touch.view!.superview!.superclass! .isSubclass(of: newReminderController.self) {
+         //   print ("Touch in forbiden")
+          //  return false
+      //  }else{
+            print ("Touch in allowed")
         return true
+   // }
     }
 }
 
@@ -38,8 +56,38 @@ class newReminderController: UIViewController {
     
     @IBOutlet weak var textfield: UITextField!
     
-    @IBOutlet weak var btn: UIButton!
+
     
+    
+    
+    
+    @objc func enabled(){
+       
+        if(textfield.text != ""){
+            let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            
+            if let bd =  NSEntityDescription.insertNewObject(forEntityName: "Reminder", into: moc) as? Reminder {
+                
+                if let text : String = textfield.text{
+                    print(text)
+                bd.content=text
+                }
+                
+                do {
+                    try moc.save()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTableView"),
+                                                    object: nil)
+                    
+                } catch {
+                    print("unable to add reminder\(error)")
+                    
+                }
+                
+                
+            }
+        }
+        
+    }
     
     var keyboardHeight: CGFloat=0
 
@@ -59,19 +107,29 @@ class newReminderController: UIViewController {
     
 
     @IBAction func resignKeyboard(_ sender: AnyObject) {
-         sender.resignFirstResponder()
+        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hideKeyboard"),
                                         object: nil )
+         sender.resignFirstResponder()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.enabled),
+                                               name: NSNotification.Name(rawValue: "addReminder"),
+                                               object: nil)
+        
+        
+        
     }
+    
     
 }
 

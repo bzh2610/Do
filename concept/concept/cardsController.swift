@@ -31,6 +31,16 @@ class cardsController: UIViewController {
         print("swipe_card()")
         
 
+        //UI CHANGE
+        //Void switching to wrong controller when card is dismissed with (x) button
+        if(direction.x == 0 && direction.y == 0 && velocity.x == 0 && velocity.y == 0){
+            if(currentCard == leftCard){
+               // hiddenCard=rightCard
+            }else{
+               // hiddenCard=leftCard
+            }
+        }
+        
         if(last_swipe_update > 2){
             last_swipe_update=0;
         }
@@ -48,7 +58,7 @@ class cardsController: UIViewController {
                 
                 
             }
-            else if(velocity.x < 50){
+            else if(velocity.x < -50){
                 
                 self.hiddenCard.frame.origin.x=UIScreen.main.bounds.width*0.05+UIScreen.main.bounds.width*0.9 + UIScreen.main.bounds.width*0.05
                 
@@ -62,7 +72,7 @@ class cardsController: UIViewController {
             
             
         }
-        else if(velocity.x < 50){
+        else if(velocity.x < -50){
             
             self.hiddenCard.frame.origin.x=self.currentCard.frame.origin.x + self.currentCard.bounds.width + UIScreen.main.bounds.width*0.05
             
@@ -70,7 +80,7 @@ class cardsController: UIViewController {
         }
         
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.4) {
             
             if(self.currentCard.frame.height > UIScreen.main.bounds.height*0.8){
                 self.currentCard.frame.origin.x = UIScreen.main.bounds.width*0.05
@@ -95,7 +105,7 @@ class cardsController: UIViewController {
             
             
             
-            if(velocity.y > 1000){
+            if(velocity.y > 500 && abs(velocity.x)<velocity.y ){
                 
                 
                  //visible
@@ -184,8 +194,11 @@ class cardsController: UIViewController {
     }
     
     
-
+    @objc func switchSmallCardUI(){
+        swipe_card(direction: CGPoint(x:0, y:0), velocity: CGPoint(x:0, y: 501))
+    }
     
+
     @objc func handleTapGesture(gestureRecognizer: UIGestureRecognizer){
         print("∞~~~~~~~")
 
@@ -246,10 +259,18 @@ class cardsController: UIViewController {
         }
     }
     
-    
+   
     override func viewDidLoad() {
          print("CardsController -> viewdidload()")
         super.viewDidLoad()
+       
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.switchSmallCardUI),
+                                               name: NSNotification.Name(rawValue: "switchSmallCardUI"),
+                                               object: nil)
+        
+        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGestureRecognizer))
         panGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(panGestureRecognizer)
@@ -260,7 +281,7 @@ class cardsController: UIViewController {
         tapGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(tapGestureRecognizer) //détecte les clics sur
 
-    
+        
     }
 
     override func didReceiveMemoryWarning() {

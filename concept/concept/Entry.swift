@@ -3,16 +3,16 @@
 import UIKit
 import CoreData
 
-/*
 
+/*
 class Reminder: NSManagedObject {
     
     @NSManaged var content: String?
 
-}
-*/
+}*/
 
 
+/*
 class Meal {
     
     //MARK: Properties
@@ -43,3 +43,28 @@ class Meal {
     }
 }
 
+
+
+
+class Reminder {
+    
+    
+    var content: String
+   // var photo: UIImage?
+ //   var rating: Int
+    
+    //MARK: Initialization
+    
+    init?(content: String) {
+        
+        // The name must not be empty
+        guard !content.isEmpty else {
+            return nil
+        }
+        
+        
+        // Initialize stored properties.
+        self.content = content
+    }
+}
+*/
